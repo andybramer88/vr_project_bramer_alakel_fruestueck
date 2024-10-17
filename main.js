@@ -1,7 +1,8 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import {setupCounter} from './counter.js'
+import {setupThree} from "./three.js";
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -15,10 +16,14 @@ document.querySelector('#app').innerHTML = `
     <div class="card">
       <button id="counter" type="button"></button>
     </div>
+    <div id="three">
+    </div>
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
   </div>
 `
 
+
 setupCounter(document.querySelector('#counter'))
+setupThree(document.querySelector('#three'));
