@@ -19,14 +19,14 @@ export async function setupThree(element) {
     scene.add(ambientLight);
 
     // Create a cube geometry and material
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-
+    const geometry = new THREE.CylinderGeometry( 5, 5, 20, 64,8,1,0,2*Math.PI);
+    const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    // CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
     // Create a mesh using the geometry and material
-    const cube = new THREE.Mesh(geometry, material);
+    const cylinder = new THREE.Mesh(geometry, material);
 
     // Add the cube to the scene
-    scene.add(cube);
+    scene.add(cylinder);
 
     // Set up controls (optional: adjust sensitivity)
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -38,7 +38,7 @@ export async function setupThree(element) {
         requestAnimationFrame(animate);
 
         // Rotate the cube
-        cube.rotation.y += 0.01;
+        cylinder.rotation.y += 0.01;
 
         controls.update();
         renderer.render(scene, camera);
