@@ -12,21 +12,22 @@ export async function setupThree(element) {
 
     // Create a camera (adjust position and field of view as needed)
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.z = 20;
 
     // Create lighting
-    const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+    const ambientLight = new THREE.AmbientLight(0xcccccc, 2);
     scene.add(ambientLight);
 
     // Create a cube geometry and material
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-
+    const geometry = new THREE.CylinderGeometry( 5, 5, 20, 64,8,1,0,2*Math.PI);
+    const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+    // CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
     // Create a mesh using the geometry and material
-    const cube = new THREE.Mesh(geometry, material);
+    material.side = THREE.DoubleSide
+    const cylinder = new THREE.Mesh(geometry, material);
 
     // Add the cube to the scene
-    scene.add(cube);
+    scene.add(cylinder);
 
     // Set up controls (optional: adjust sensitivity)
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -38,7 +39,8 @@ export async function setupThree(element) {
         requestAnimationFrame(animate);
 
         // Rotate the cube
-        cube.rotation.y += 0.01;
+        //cylinder.rotation.x += 0.01;
+
 
         controls.update();
         renderer.render(scene, camera);
