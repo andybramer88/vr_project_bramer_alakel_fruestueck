@@ -23,7 +23,7 @@ document.querySelector('#app').innerHTML = `
     </p>
   </div>
 `
-
+//Test von Manuel
 
 setupCounter(document.querySelector('#counter'))
 setupThree(document.querySelector('#three'));
