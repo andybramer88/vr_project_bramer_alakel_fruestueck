@@ -18,7 +18,7 @@ export async function setupThree(element) {
     const ambientLight = new THREE.AmbientLight(0xcccccc, 3);
     scene.add(ambientLight);
     const texture = new THREE.TextureLoader().load( 
-        "resources/brick.png",
+        "resources/textur_ziegel.png",
         (loadedTexture) => {
             console.log('Texture loaded successfully');
         },
