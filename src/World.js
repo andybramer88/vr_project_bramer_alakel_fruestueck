@@ -20,7 +20,7 @@ export async function setupWorld(element) {
     setupLighting(scene);
 
     // Load texture
-    const texture = loadTexture("resources/brick.png");
+    const texture = loadTexture("resources/textur_ziegel.png");
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(4, 4);
