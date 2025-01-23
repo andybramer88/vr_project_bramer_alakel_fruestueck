@@ -2,7 +2,7 @@ import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import {setupCounter} from './src/counter.js'
-import {setupThree} from "./src/three.js";
+import { setupWorld } from './src/World.js'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -26,4 +26,4 @@ document.querySelector('#app').innerHTML = `
 
 
 setupCounter(document.querySelector('#counter'))
-setupThree(document.querySelector('#three'));
+setupWorld(document.getElementById('three'));
