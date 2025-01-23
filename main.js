@@ -2,7 +2,7 @@ import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import {setupCounter} from './src/counter.js'
-import {setupThree} from "./src/three.js";
+import { setupWorld } from './src/World.js'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -12,7 +12,7 @@ document.querySelector('#app').innerHTML = `
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
     </a>
-    <h1>Hello Vite!</h1>
+    <h1>Welcome to our Escape Game!</h1>
     <div class="card">
       <button id="counter" type="button"></button>
     </div>
@@ -26,4 +26,4 @@ document.querySelector('#app').innerHTML = `
 //Test von Manuel
 
 setupCounter(document.querySelector('#counter'))
-setupThree(document.querySelector('#three'));
+setupWorld(document.getElementById('three'));
