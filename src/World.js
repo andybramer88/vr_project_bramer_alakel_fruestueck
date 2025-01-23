@@ -60,15 +60,16 @@ export async function setupWorld(element) {
     scene.add(circle);
 
     // Add water at the bottom
-    const waterHeight = 0.5;  // Half a meter of water
+    const waterHeight = 0.5;  // Initial height of water
     const waterGeometry = new THREE.CylinderGeometry(cylinderRadius-0.1, cylinderRadius-0.1, waterHeight, 64);
     const waterMaterial = new THREE.MeshStandardMaterial({
         color: 0x1e90ff,  // Water-like color
         transparent: true,
-        opacity: 0.6  // Semi-transparent
+        opacity: 0.6,  // Semi-transparent
+        side: THREE.DoubleSide  // Render both sides
     });
     const water = new THREE.Mesh(waterGeometry, waterMaterial);
-    water.position.set(0, waterHeight / 2, 0);  // Position at the bottom
+    water.position.set(0, waterHeight / 2, 0);  // Initial position at the bottom
     scene.add(water);
 
     // Set up controls (optional: adjust sensitivity)
@@ -118,10 +119,16 @@ export async function setupWorld(element) {
         cylinder.position.copy(wellBody.position);
         cylinder.quaternion.copy(wellBody.quaternion);
 
+        // Animate water level rise
+        if (water.position.y < wellHeight) {  // Target height for water
+            water.position.y += 0.01;  // Increment water height
+            waterBody.position.y = water.position.y;  // Sync physics body
+        }
+
         // Apply viscosity effect
         world.bodies.forEach(body => {
             if (body !== wellBody && body !== waterBody && body !== bottomBody) {
-                if (body.position.y < waterHeight) {
+                if (body.position.y < water.position.y) {
                     // Apply damping to simulate viscosity
                     body.velocity.scale(0.9, body.velocity);
                     body.angularVelocity.scale(0.9, body.angularVelocity);
