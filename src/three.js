@@ -15,12 +15,27 @@ export async function setupThree(element) {
     camera.position.z = 20;
 
     // Create lighting
-    const ambientLight = new THREE.AmbientLight(0xcccccc, 2);
+    const ambientLight = new THREE.AmbientLight(0xcccccc, 3);
     scene.add(ambientLight);
-
+    const texture = new THREE.TextureLoader().load( 
+        "resources/brick.png",
+        (loadedTexture) => {
+            console.log('Texture loaded successfully');
+        },
+        undefined,
+        (error) => {
+            console.error('Error loading texture:', error);
+        }
+    );
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set( 4, 4 );
     // Create a cube geometry and material
-    const geometry = new THREE.CylinderGeometry( 5, 5, 20, 64,8,1,0,2*Math.PI);
-    const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+    const geometry = new THREE.CylinderGeometry( 5, 5, 20, 64, 8, 1, 0, 2*Math.PI);
+    const material = new THREE.MeshStandardMaterial({ 
+        map: texture,
+        color: 0xffffff  // bright red as a fallback
+    });
     // CylinderGeometry(radiusTop : Float, radiusBottom : Float, height : Float, radialSegments : Integer, heightSegments : Integer, openEnded : Boolean, thetaStart : Float, thetaLength : Float)
     // Create a mesh using the geometry and material
     material.side = THREE.DoubleSide
